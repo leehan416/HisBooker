@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: ❓ 문의사항 / 기타 요청
+    url: https://github.com/leehan416/hisbooker/issues/new
+    about: 일반적인 문의 사항은 여기에서 작성하세요.

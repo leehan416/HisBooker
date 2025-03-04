@@ -1,21 +1,24 @@
 package com.hgu.hisbooker.comon.domain;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @ToString
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@SuperBuilder
 public abstract class BaseEntity {
 
     @Id
@@ -36,4 +39,7 @@ public abstract class BaseEntity {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
+    public void delete() {
+        this.deleted = true;
+    }
 }
