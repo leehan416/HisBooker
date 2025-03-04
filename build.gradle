@@ -2,6 +2,8 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.4.3'
     id 'io.spring.dependency-management' version '1.1.7'
+    id("com.diffplug.spotless") version "6.25.0"
+
 }
 
 group = 'com.hgu'
@@ -21,6 +23,29 @@ configurations {
 
 repositories {
     mavenCentral()
+}
+spotless {
+    java {
+        // Google Java 포맷 적용
+        /*
+            googleJavaFormat() : 탭은 2개의 공백
+            googleJavaFormat().aosp() : 탭은 4개의 공백
+            [참고] https://github.com/google/google-java-format/issues/525
+         */
+        googleJavaFormat().aosp()
+        // 아래 순서로 import문 정렬
+        importOrder('java', 'javax', 'jakarta', 'org', 'com')
+        // 사용하지 않는 import 제거
+        removeUnusedImports()
+        // 각 라인 끝에 있는 공백을 제거
+        trimTrailingWhitespace()
+        // 파일 끝에 새로운 라인 추가
+        endWithNewline()
+    }
+}
+
+tasks.named('compileJava') {
+    dependsOn 'spotlessApply'
 }
 
 dependencies {
