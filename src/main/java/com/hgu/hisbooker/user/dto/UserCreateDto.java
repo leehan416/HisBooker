@@ -1,5 +1,6 @@
 package com.hgu.hisbooker.user.dto;
 
+import com.hgu.hisbooker.user.domain.User;
 import com.hgu.hisbooker.user.dto.requset.ReqUserCreateDto;
 
 import lombok.Builder;
@@ -10,6 +11,7 @@ import lombok.Setter;
 @Getter
 @Builder
 public class UserCreateDto {
+    private Long id;
     private String email; // username (id)
     private String password;
     private String nickname;
@@ -19,6 +21,15 @@ public class UserCreateDto {
                 .email(reqUserCreateDto.getEmail())
                 .password(reqUserCreateDto.getPassword())
                 .nickname(reqUserCreateDto.getNickname())
+                .build();
+    }
+
+    public static UserCreateDto from(User user) {
+        return builder()
+                .id(user.getId())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .nickname(user.getNickname())
                 .build();
     }
 }

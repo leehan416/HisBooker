@@ -10,6 +10,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class UserUpdateDto {
+    private Long id;
     private String email; // username (id)
     private String nickname;
 

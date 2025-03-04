@@ -21,7 +21,7 @@ public class UserController {
 
     @PostMapping("")
     public ResponseEntity<ResUserCreateDto> createUser(
-            @RequestBody ReqUserCreateDto reqUserCreateDto) {
+            @RequestBody final ReqUserCreateDto reqUserCreateDto) {
         return ResponseEntity.ok(
                 ResUserCreateDto.from(
                         userService.createUser(UserCreateDto.from(reqUserCreateDto))));
@@ -29,14 +29,15 @@ public class UserController {
 
     @PutMapping("")
     public ResponseEntity<ResUserCreateDto> updateUser(
-            @RequestBody ReqUserUpdateDto reqUserUpdateDto) {
+            @RequestBody final ReqUserUpdateDto reqUserUpdateDto) {
         return ResponseEntity.ok(
                 ResUserCreateDto.from(
                         userService.updateUser(UserUpdateDto.from(reqUserUpdateDto))));
     }
 
     @DeleteMapping("")
-    public ResponseEntity<ResUserCreateDto> deleteUser(@RequestBody Long userId) {
-        return ResponseEntity.ok(ResUserCreateDto.from(userService.deleteUser(userId)));
+    public ResponseEntity<ResUserCreateDto> deleteUser(@RequestBody final Long userId) {
+        userService.deleteUser(UserUpdateDto.builder().id(userId).build());
+        return ResponseEntity.ok().build();
     }
 }
