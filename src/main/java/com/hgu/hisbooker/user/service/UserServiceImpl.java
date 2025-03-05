@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
 
     private User getUserById(final Long userId) {
         return userRepository
-                .findAllByIdAndDeletedFalse(userId)
+                .findByIdAndDeletedFalse(userId)
                 .orElseThrow(() -> new RuntimeException("User Not Fount"));
     }
 }
