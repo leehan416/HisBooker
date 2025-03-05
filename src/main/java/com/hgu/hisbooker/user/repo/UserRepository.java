@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.hgu.hisbooker.user.domain.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findAllByIdAndDeletedFalse(Long userId);
+    Optional<User> findByIdAndDeletedFalse(Long userId);
 }
